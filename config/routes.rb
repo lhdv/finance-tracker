@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'portifolio', to: 'users#portifolio'
+  get 'search_stock', to: 'stocks#search'
 end
