@@ -7,7 +7,10 @@ class Stock < ApplicationRecord
       secret_token: Rails.application.credentials.iex_api[:secret_token],
       endpoint: 'https://sandbox.iexapis.com/v1'
     )
-    client.price(ticker)
+    
+    # The code bellow is equal to the above it
+    # Stock.new(ticker: ticker, name: client.company(ticker).company_name, last_price: client.price(ticker))
+    new(ticker: ticker, name: client.company(ticker).company_name, last_price: client.price(ticker))
   end
 
 end
