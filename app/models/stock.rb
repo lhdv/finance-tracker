@@ -1,4 +1,9 @@
 class Stock < ApplicationRecord
+  has_many :user_stocks
+  has_many :users, through: :user_stocks
+
+  validates :name, presence: true
+  validates :ticker, presence: true
   
   # Class method to lookup a stock price
   def self.new_lookup(ticker)
