@@ -16,10 +16,17 @@ class Stock < ApplicationRecord
     begin      
       # The code bellow is equal to the above it
       # Stock.new(ticker: ticker, name: client.company(ticker).company_name, last_price: client.price(ticker))
-      new(ticker: ticker, name: client.company(ticker).company_name, last_price: client.price(ticker))
+      new(ticker: ticker.upcase, name: client.company(ticker).company_name, last_price: client.price(ticker))
     rescue => exception
       return nil
     end
+  end
+
+  # Class method to lookup a for an existing stock ticker
+  def self.check_db(ticker)
+    # The code bellow is equal to the above it
+    # Stock.where(ticker: ticker).first
+    where(ticker: ticker).first
   end
 
 end

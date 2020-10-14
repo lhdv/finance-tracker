@@ -6,5 +6,14 @@
   <strong>Symbol:</strong> <%= @stock.ticker %>
   <strong>Name:</strong> <%= @stock.name %>
   <strong>Price:</strong> <%= @stock.last_price %>
+  <% if current_user.can_track_stock?(@stock.ticker) %>
+  <%= link_to 'Add to my portifolio', user_stocks_path(user:current_user, ticker: @stock.ticker), method: :post, class: 'btn btn-success' %>
+  <% else %>
+  <span class="badge badge-secondary">
+    You're already tracking
+    <%= " 10 stocks" if !current_user.under_stock_limit? %>
+    <%= " this stock" if current_user.stock_already_tracked?(@stock.ticker) %>
+  </span>
+  <% end %>
 </div>
 <% end %>
