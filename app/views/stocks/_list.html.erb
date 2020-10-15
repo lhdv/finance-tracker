@@ -15,7 +15,11 @@
           <th scope="row"><%= s.ticker %></th>
           <td><%= s.name %></td>
           <td><%= s.last_price %></td>
-          <td><%= link_to 'Remove', user_stock_path(s), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-sm btn-warning"%></td>
+          <td>
+          <% if current_user.id == @user.id %>
+          <%= link_to 'Remove', user_stock_path(s), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-sm btn-warning"%>
+          <% end %>
+          </td>
         </tr>        
         <% end %>
       </tbody>
